@@ -54,31 +54,9 @@ const Perfil=()=>{
 
 export default function App() {
   return (
-    <NavigationContainer>
       <View style={{flex:1, backgroundColor:"black"}}> 
         <Perfil/>
-        <View>
-          <Navigator useLegacyImplementation tabBarOptions={{tabStyle:{backgroundColor:"#FFB800"}, activeTintColor:"black", inactiveTintColor:"#A48000" }}>
-            <Screen name="Pesquisar"
-            options={{tabBarIcon:({size, color}) => (
-          <AntDesign name="search1" size={size} color={color}/>
-        )}}/>
-            <Screen name="DashBoard"
-            options={{tabBarIcon:({size, color}) => (
-          <Entypo name="bar-graph" size={size} color={color}/>
-        )}}/>
-            <Screen name="Perfil"
-            options={{tabBarIcon:({size, color}) => (
-          <MaterialCommunityIcons name="account" size={size} color={color}/>
-        )}}/>
-            <Screen name="Doação"
-            options={{tabBarIcon:({size, color}) => (
-          <Feather name="gift" size={size} color={color}/>
-        )}}/>
-          </Navigator>
-        </View>
       </View>
-    </NavigationContainer>
   );
 }
 
