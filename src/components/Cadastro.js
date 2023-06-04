@@ -55,7 +55,7 @@ const CadastroForm = () =>{
                 <Text style={{color:"white", fontSize:18 }}>Cadastrar</Text>
             </TouchableOpacity>
             <Text style={{color:"#3DA2FF",marginTop:"32px",fontWeight: 600}}>
-              <TouchableOpacity>Voltar</TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('Login')}>Voltar</TouchableOpacity>
             </Text>
         </View>
       </View>
