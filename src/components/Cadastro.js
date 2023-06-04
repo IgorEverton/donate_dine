@@ -1,5 +1,6 @@
 import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import { NavigationContainer} from '@react-navigation/native';
 
   const estilos = {
     h1:{

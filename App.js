@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Login from './components/Login';
+import { StatusBar } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import Routes from './src/routes/routes';
 
 export default function App() {
   return (
-    <View>
-      <Login/>
-    </View>
+    <NavigationContainer>
+      <Routes/>
+    </NavigationContainer>
   );
 }
 
