@@ -2,7 +2,7 @@ import React,  {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {useNavigation } from '@react-navigation/native';
-import Cadastro from './Cadastro';
+
 
 const LoginForm = () =>{
   const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ const LoginForm = () =>{
 
         </View>
           <TextInput onChangeText={setSenha} style={{backgroundColor:"white", height:"30px", width:"250px",borderRadius:"5px",marginTop:"5px", marginBottom:"40px"}}/>
-            <TouchableOpacity style={{backgroundColor:"#0B8700", width:"110px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", color:"white"}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Pesquisa')} style={{backgroundColor:"#0B8700", width:"110px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", color:"white"}}>
                 <Text style={{color:"white", fontSize:18 }}>Logar</Text>
             </TouchableOpacity>  
             <Text style={{fontWeight:200, color:"#3DA2FF",marginTop:"32px"}}>Não tem conta? 
@@ -42,8 +42,6 @@ const LoginForm = () =>{
       </View>
   )
   }
-
-
 
 export default ()=>{
   return(
