@@ -25,7 +25,7 @@ export function PesquisaNavigation(){
         <Stack.Navigator>
             <Stack.Screen
             name="Pesquisa"
-            component={LogiPesquisan}
+            component={Pesquisa}
             options={{headerShown: false}}
             />
         </Stack.Navigator>

@@ -1,9 +1,8 @@
 import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { AntDesign, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import {useNavigation } from '@react-navigation/native';
 
-const {Navigator, Screen} = createBottomTabNavigator();
+
 
   const estilos = {
     h1:{
@@ -45,6 +44,7 @@ const CadastroForm = () =>{
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setconfirmaSenha] = useState("");
+  const navigation = useNavigation
 
       return(
       <View style={{display:"flex",flex:1, margin:25}}>
@@ -56,9 +56,6 @@ const CadastroForm = () =>{
             <TouchableOpacity style={estilos.botaoCadastrar}>
                 <Text style={{color:"white", fontSize:18 }}>Cadastrar</Text>
             </TouchableOpacity>
-            <Text style={{color:"#3DA2FF",marginTop:"32px",fontWeight: 600}}>
-              <TouchableOpacity>Voltar</TouchableOpacity>
-            </Text>
         </View>
       </View>
   )

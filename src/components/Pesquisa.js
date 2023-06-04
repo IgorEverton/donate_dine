@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import { Text, View, TextInput, CheckBox, TouchableOpacity, ScrollView, Modal} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { AntDesign, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 
 const {Navigator, Screen} = createBottomTabNavigator();
 

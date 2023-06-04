@@ -32,7 +32,7 @@ export default function RoutesBar(){
       }}
     />
     <Screen
-      name="DashBoard"
+      name="Dashboard"
       component={Dashboard}
       options={{
         headerShown: false,

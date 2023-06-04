@@ -1,10 +1,5 @@
 import React,  {useState} from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { AntDesign, Entypo, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
-
-const {Navigator, Screen} = createBottomTabNavigator();
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';;
 
 
 const Perfil=()=>{
@@ -41,9 +36,6 @@ const Perfil=()=>{
             <TouchableOpacity style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical:50,marginBottom:"5%"}}>
                 <Text style={{color:"white", fontSize:18 }}>Atualizar</Text>
             </TouchableOpacity> 
-            <Text style={{color:"#3DA2FF",marginTop:"25px",fontWeight: 600}}>
-              <TouchableOpacity>Voltar</TouchableOpacity>
-            </Text> 
         </View>
       </View>
   )
