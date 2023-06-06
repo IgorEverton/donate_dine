@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import { Text, View, TextInput, CheckBox, TouchableOpacity, ScrollView, Modal} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { RadioButton } from 'react-native-paper';
 
-const {Navigator, Screen} = createBottomTabNavigator();
 
 const Pesquisa=()=>{
   const [selectLote, setSelectLote] = useState();
   const [selectEstoque, setSelectEstoque] = useState();
-  const [selectDoacao, setSelectDoacao] = useState();
+  const [selectedOption, setSelectedOption] = useState(null);
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
   return(
     <View style={{flex:1, backgroundColor:"black", alignItems:"center"}} >
       <Text style={{fontSize:33, fontWeight:"bold",marginTop:"20px",color:"white",marginBottom: 20}}>Pesquisar</Text>
@@ -15,14 +17,25 @@ const Pesquisa=()=>{
         <Text style={{color:"white", marginBottom:2}}>ID</Text>
         <TextInput style={{height:"35px", width:"250px",borderRadius:"7px", backgroundColor:"white"}}/>
       </View>
-      <View style={{flexDirection:'row', marginBottom: 20, marginTop:11}}>
-        <CheckBox style={{marginRight:5}} value={selectLote} onValueChange={setSelectLote}/>
-        <Text style={{color:"white",marginRight:27}}>Lote</Text>
-        <CheckBox style={{marginRight:5}} value={selectEstoque} onValueChange={setSelectEstoque}/>
-        <Text style={{color:"white",marginRight:27}}>Estoque</Text>
-        <CheckBox style={{marginRight:5}} value={selectDoacao} onValueChange={setSelectDoacao}/>
-        <Text style={{color:"white"}}>Doação</Text>
+      <RadioButton.Group
+        onValueChange={handleOptionChange}
+        value={selectedOption}
+      >
+      <View style={{flexDirection: "row"}}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <RadioButton value="lote" uncheckedColor="white"/>
+          <Text style={{ marginRight: 27, color: 'white' }}>Lote</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <RadioButton value="estoque" uncheckedColor="white"/>
+          <Text style={{ marginRight: 27, color: 'white' }}>Estoque</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <RadioButton value="doacao" uncheckedColor="white"/>
+          <Text style={{ color: 'white' }}>Doação</Text>
+        </View>
       </View>
+      </RadioButton.Group>
       <TouchableOpacity style={{backgroundColor:"#C30000", width:"110px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", color:"white"}}>
         <Text style={{color:"white", fontSize:18 }}>Pesquisar</Text>
       </TouchableOpacity>

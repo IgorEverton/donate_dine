@@ -1,5 +1,5 @@
 import React,  {useState} from 'react';
-import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import {Text, View, TextInput, TouchableOpacity, Picker} from 'react-native';
 import {useNavigation } from '@react-navigation/native';
 
 
@@ -44,13 +44,32 @@ const CadastroForm = () =>{
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setconfirmaSenha] = useState("");
-  const navigation = useNavigation
+  const [estoqueSelecionado, setEstoqueSelecionado] = useState(null);
+
+
+
+
+  const handleEstoqueChange = (itemValue) => {
+
+    setEstoqueSelecionado(itemValue);
+
+  };
 
       return(
       <View style={{display:"flex",flex:1, margin:25}}>
         <View style={{alignItems:"center"}}>
         <Text style={{textAlign:"center",fontSize:34, fontWeight:"bold",marginTop:"80px",color:"white"}}>Cadastrar Doação</Text>
-          <InputText titulo={"Selecionar estoque disponível"}/>
+        <View>
+          <Picker
+            selectedValue={estoqueSelecionado}
+            style={estilos.input}
+            onValueChange={handleEstoqueChange}>
+            <Picker.Item label="Selecione um estoque" value={null} />
+            <Picker.Item label="Estoque 1" value="estoque1" />
+            <Picker.Item label="Estoque 2" value="estoque2" />
+            <Picker.Item label="Estoque 3" value="estoque3" />
+          </Picker>
+        </View>
           <InputText titulo={"CNPJ"}/>
           <InputText titulo={"Descrição"}/>
             <TouchableOpacity style={estilos.botaoCadastrar}>
