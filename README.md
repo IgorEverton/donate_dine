@@ -28,7 +28,8 @@
 -  Doação
     - [Criar Nova](#criar-uma-nova-doação)
     - [Recuperar](#recuperar-uma-doação)
-
+- Status
+    - [Estatísticas](#recuperar-estatísticas-do-sistema)
 ---
 
 ## Cadastrar Usuário
@@ -705,3 +706,24 @@ response
 | 400 | Erro na requisição |
 | 404 | Doação não encontrada |
 
+---
+
+## Recuperar Estatísticas do Sistema
+`GET` /api/stats
+
+Retorna o total de lotes, estoques e doações no sistema.
+
+**Exemplo de corpo de response**
+```json
+{
+    "totalLotes": 100,
+    "totalEstoques": 80,
+    "totalDoacoes": 50
+}
+```
+
+**Códigos de Resposta**
+| Código | Descrição |
+|:-------:|:-----------:|
+| 200 | Estatísticas recuperadas com sucesso |
+| 400 | Erro na requisição |
