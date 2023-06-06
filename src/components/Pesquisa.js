@@ -1,26 +1,113 @@
 import React, {useState} from 'react';
-import { Text, View, TextInput, CheckBox, TouchableOpacity, ScrollView, Modal} from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
 import { RadioButton } from 'react-native-paper';
-
+import { Picker } from '@react-native-picker/picker';
 
 const Pesquisa=()=>{
   const [selectLote, setSelectLote] = useState();
   const [selectEstoque, setSelectEstoque] = useState();
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("lote");
+  const [selectedValue, setSelectedValue] = useState("id");
+  const [valueInput, setValueInput] = useState("");
+
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+    if(option === "lote") {
+      setSelectedValue("id");
+    } else if(option === "estoque") {
+      setSelectedValue("id");
+    } else if(option === "doacao") {
+      setSelectedValue("id");
+    }
   };
+  const renderPickerItems = () => {
+    if(selectedOption === "lote") {
+      return (
+        <>
+          <Picker.Item label="Id" value="id" />
+          <Picker.Item label="Quantidade" value="quantidade" />
+          <Picker.Item label="Unidade de Medida" value="unidade_medida" />
+          <Picker.Item label="Fornecedor" value="fornecedor" />
+          <Picker.Item label="Data de Criação" value="data_criacao" />
+        </>
+      );
+    } else if(selectedOption === "estoque") {
+      return <Picker.Item label="Id" value="id" />;
+    } else if(selectedOption === "doacao") {
+      return (
+        <>
+          <Picker.Item label="Id" value="id" />
+          <Picker.Item label="CNPJ" value="cnpj" />
+        </>
+      );
+    }
+  };
+    const handleSearch = () => {
+      let endpoint;
+      const token = 'yourBearerToken'; // Substitua isso pelo seu token Bearer
+      if(selectedOption === "lote") {
+        switch (selectedValue) {
+          case "id":
+            endpoint = `http://localhost:8080/api/lote/id/${valueInput}`;
+            break;
+          case "quantidade":
+            endpoint = `http://localhost:8080/api/lote/quantidade/${valueInput}`;
+            break;
+          case "unidade_medida":
+            endpoint = `http://localhost:8080/api/lote/unidade_medida/${valueInput}`;
+            break;
+          case "fornecedor":
+            endpoint = `http://localhost:8080/api/lote/fornecedor/${valueInput}`;
+            break;
+          case "data_criacao":
+            endpoint = `http://localhost:8080/api/lote/datacriacao/${valueInput}`;
+            break;
+          default:
+            break;
+        }
+      } else if(selectedOption === "estoque") {
+        endpoint = `http://localhost:8080/api/estoque/${selectedValue}/${valueInput}`;
+      } else if(selectedOption === "doacao") {
+        switch (selectedValue) {
+          case "id":
+            endpoint = `http://localhost:8080/api/doacao/id/${valueInput}`;
+            break;
+          case "cnpj":
+            endpoint = `http://localhost:8080/api/doacao/cnpj/${valueInput}`;
+            break;
+          default:
+            break;
+        }
+      }
+      axios.get(endpoint, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
   return(
     <View style={{flex:1, backgroundColor:"black", alignItems:"center"}} >
       <Text style={{fontSize:33, fontWeight:"bold",marginTop:"20px",color:"white",marginBottom: 20}}>Pesquisar</Text>
       <View>
-        <Text style={{color:"white", marginBottom:2}}>ID</Text>
-        <TextInput style={{height:"35px", width:"250px",borderRadius:"7px", backgroundColor:"white"}}/>
+        <Text style={{color:"white", marginBottom:2}}>Pesquisar por:</Text>
+        <Picker
+          selectedValue={selectedValue}
+          onValueChange={(itemValue) => setSelectedValue(itemValue)}
+        >
+          {renderPickerItems()}
+        </Picker>
+        <br/>
+        <TextInput style={{height:"35px", width:"250px",borderRadius:"7px", backgroundColor:"white"}} value={valueInput} onChangeText={txt => setValueInput(txt)}/>
       </View>
       <RadioButton.Group
         onValueChange={handleOptionChange}
-        value={selectedOption}
-      >
+        value={selectedOption}>
       <View style={{flexDirection: "row"}}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <RadioButton value="lote" uncheckedColor="white"/>
@@ -42,7 +129,6 @@ const Pesquisa=()=>{
     </View>
 )
 }
-
 const DetalheRecuperado=({ visible, onClose })=>{
     if (!visible) {
     return null;
@@ -62,13 +148,11 @@ const DetalheRecuperado=({ visible, onClose })=>{
             <TouchableOpacity onPress={onClose}>Voltar</TouchableOpacity>
           </Text> 
       </View>
-
   )
-}
 
+}
 const Recuperados=()=>{
   const [visibleModal, setVisibleModal] = useState(false);
-
   return(
     <View style={{flex:1, alignItems:"center", marginTop:10}}>
       <TouchableOpacity onPress={()=>setVisibleModal(true)} style={{width:"300px", height:"80px", backgroundColor:"black"}}>
