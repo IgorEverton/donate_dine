@@ -49,7 +49,7 @@ const DoacaoForm = () =>{
   const cadastrarDoacao = async () => {
     try {
       // Fazer a chamada para a API
-      const response = await axios.post('http://localhost:8080/api/doacao/estoque/{idEstoque}', {
+      const response = await axios.post('http://localhost:8080/api/doacao/estoque/{id}', {
         estoque: estoqueSelecionado,
         cnpj: cnpj,
         descricao: descricao
