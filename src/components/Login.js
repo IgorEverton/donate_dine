@@ -1,6 +1,7 @@
 import React,  {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
+import axios from 'axios';
 import {useNavigation } from '@react-navigation/native';
 
 
@@ -9,13 +10,29 @@ const LoginForm = () =>{
   const [senha, setSenha] = useState("");
   const navigation = useNavigation();
 
-  useEffect(() => {
-    async function salvarAuthToken() {
-      await AsyncStorage.setItem('authToken', authToken);
-    }
 
-    salvarAuthToken();
-  }, []);
+
+  const handleLogin = async () => {
+    try {
+      // Fazer a chamada para a API
+      const response = await axios.post('https://donatedine.com/api/login', {
+        email: email,
+        senha: senha
+      });
+
+      // Obter o token de autenticação da resposta da API
+      const authToken = response.data.token;
+
+      // Salvar o token de autenticação no AsyncStorage
+      await AsyncStorage.setItem('authToken', authToken);
+
+      // Navegar para a próxima tela após o login
+      navigation.navigate('Pesquisa');
+    } catch (error) {
+      console.log(error);
+      // Tratar erros de login aqui
+    }
+  };
 
       return(
       <View style={{display:"flex",flex:1, margin:25,alignItems:"center", backgroundColor:"black"}}>

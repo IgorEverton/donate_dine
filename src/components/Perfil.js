@@ -3,7 +3,36 @@ import {Text, View, TextInput, TouchableOpacity} from 'react-native';;
 
 
 const Perfil=()=>{
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
+  const [novoEmail, setNovoEmail] = useState('');
+  const [confirmarNovoEmail, setConfirmarNovoEmail] = useState('');
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+
+  const atualizarPerfil = async () => {
+    try {
+      // Fazer a chamada para a API
+      const response = await axios.put('https://donatedine.com/api/perfil', {
+        email: email,
+        novoEmail: novoEmail,
+        confirmarNovoEmail: confirmarNovoEmail,
+        novaSenha: novaSenha,
+        confirmarSenha: confirmarSenha
+      });
+
+      // Tratar a resposta da API conforme necessário
+
+      // Limpar os campos após a atualização
+      setEmail('');
+      setNovoEmail('');
+      setConfirmarNovoEmail('');
+      setNovaSenha('');
+      setConfirmarSenha('');
+    } catch (error) {
+      console.log(error);
+      // Tratar erros de atualização do perfil aqui
+    }
+  };
 
       return(
       <View style={{display:"flex",flex:1, margin:25}}>

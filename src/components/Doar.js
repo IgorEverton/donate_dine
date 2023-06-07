@@ -1,8 +1,5 @@
 import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity, Picker} from 'react-native';
-import {useNavigation } from '@react-navigation/native';
-
-
 
   const estilos = {
     h1:{
@@ -33,26 +30,40 @@ function InputText(props){
     <>
       <View style={{marginTop:"35px"}}>
         <Text style={{fontSize:15, fontWeight: 500, paddingLeft: 10,color:"white"}}>{props.titulo}</Text>
-        <TextInput placeholder={props.placeholder} style={estilos.input}/>
+        <TextInput placeholder={props.placeholder} style={estilos.input} value={props.value} onChangeText={props.onChangeText}/>
       </View>
     </>
   )
 }
 
 const CadastroForm = () =>{
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [confirmaSenha, setconfirmaSenha] = useState("");
   const [estoqueSelecionado, setEstoqueSelecionado] = useState(null);
-
-
-
-
+  const [cnpj, setCnpj] = useState('');
+  const [descricao, setDescricao] = useState('');
   const handleEstoqueChange = (itemValue) => {
-
     setEstoqueSelecionado(itemValue);
+  };
 
+  
+  const cadastrarDoacao = async () => {
+    try {
+      // Fazer a chamada para a API
+      const response = await axios.post('https://donatedine.com/api/doacao', {
+        estoque: estoqueSelecionado,
+        cnpj: cnpj,
+        descricao: descricao
+      });
+
+      // Tratar a resposta da API conforme necessário
+
+      // Limpar os campos após o cadastro
+      setEstoqueSelecionado(null);
+      setCnpj('');
+      setDescricao('');
+    } catch (error) {
+      console.log(error);
+      // Tratar erros de cadastro de doação aqui
+    }
   };
 
       return(

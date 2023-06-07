@@ -1,6 +1,6 @@
 import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';
-
+import axios from 'axios';
 
   const estilos = {
     h1:{
@@ -11,20 +11,40 @@ import {Text, View, TextInput, TouchableOpacity} from 'react-native';
     input:{
       backgroundColor:"white",
       height:"30px", width:"250px",
-      borderRadius:"5px", 
+      borderRadius:"5px",
       marginTop:"5px",  paddingLeft: 10,
       fontSize:"13px", fontWeight: 300,
       letterSpacing: 1.5
     },
     botaoCadastrar:{
       backgroundColor:"#0B8700",  color:"white",
-      width:"180px", height:"40px", 
-      borderRadius:"5px", 
-      justifyContent:"center", alignItems:"center", 
+      width:"180px", height:"40px",
+      borderRadius:"5px",
+      justifyContent:"center", alignItems:"center",
       marginVertical: 50,marginBottom:"5%"
     }
   }
 
+
+  const handleCadastro = () => {
+    // Criar um objeto com os dados do formulário
+    const formData = {
+      nome: nome,
+      email: email,
+      senha: senha,
+      confirmaSenha: confirmaSenha
+    };
+    // Fazer a chamada à API usando o Axios
+    axios.post('URL_DA_API', formData)
+      .then(response => {
+        // Manipular a resposta da API, se necessário
+        console.log(response.data);
+      })
+      .catch(error => {
+        // Manipular os erros, se ocorrerem
+        console.error(error);
+      });
+  };
 function InputText(props){
 
   return(
@@ -36,14 +56,12 @@ function InputText(props){
     </>
   )
 }
-
 const CadastroForm = () =>{
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmaSenha, setconfirmaSenha] = useState("");
-
-      return(
+     return(
       <View style={{display:"flex",flex:1, margin:25}}>
         <View style={{alignItems:"center"}}>
         <Text style={{textAlign:"center",fontSize:43, fontWeight:"bold",marginTop:"80px",color:"white"}}>Cadastro</Text>
@@ -62,12 +80,11 @@ const CadastroForm = () =>{
   )
   }
 
-
-
 export default ()=>{
   return(
-    <View style={{flex:1, backgroundColor:"black"}}> 
+    <View style={{flex:1, backgroundColor:"black"}}>
       <CadastroForm/>
     </View>
   )
 }
+

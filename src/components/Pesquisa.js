@@ -48,7 +48,7 @@ const Pesquisa=()=>{
       if(selectedOption === "lote") {
         switch (selectedValue) {
           case "id":
-            endpoint = `http://localhost:8080/api/lote/id/${valueInput}`;
+            endpoint = `http://localhost:8080/api/lote/${valueInput}`;
             break;
           case "quantidade":
             endpoint = `http://localhost:8080/api/lote/quantidade/${valueInput}`;
@@ -66,11 +66,11 @@ const Pesquisa=()=>{
             break;
         }
       } else if(selectedOption === "estoque") {
-        endpoint = `http://localhost:8080/api/estoque/${selectedValue}/${valueInput}`;
+        endpoint = `http://localhost:8080/api/estoque/${valueInput}`;
       } else if(selectedOption === "doacao") {
         switch (selectedValue) {
           case "id":
-            endpoint = `http://localhost:8080/api/doacao/id/${valueInput}`;
+            endpoint = `http://localhost:8080/api/doacao/${valueInput}`;
             break;
           case "cnpj":
             endpoint = `http://localhost:8080/api/doacao/cnpj/${valueInput}`;
