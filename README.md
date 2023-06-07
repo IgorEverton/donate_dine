@@ -1,6 +1,6 @@
 # Descrição
 
----
+Nossa solução utiliza inteligência artificial com reconhecimento de imagem  para automatizar o processo de separação de alimentos em ONGs. Através da análise de imagens, a IA identifica sinais de deterioração e qualidade dos alimentos, permitindo uma triagem mais rápida e precisa. Através da nossa solução, é possível monitorar a origem e histórico dos alimentos. A classificação automatizada e otimização da distribuição contribuem para reduzir desperdícios e garantir que os alimentos adequados sejam doados para pessoas em situação de vulnerabilidade. Essa solução oferece eficiência, agilidade e segurança na luta contra o desperdício de alimentos.
 
 # Arquitetura do projeto
 

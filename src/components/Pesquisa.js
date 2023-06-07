@@ -3,7 +3,7 @@ import { Text, View, TextInput, TouchableOpacity, ScrollView, Modal} from 'react
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-
+import axios from 'axios'
 
 
 const Pesquisa=()=>{
@@ -127,7 +127,7 @@ const Pesquisa=()=>{
         </View>
       </View>
       </RadioButton.Group>
-      <TouchableOpacity style={{backgroundColor:"#C30000", width:"110px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", color:"white"}}>
+      <TouchableOpacity onPress={handleSearch} style={{backgroundColor:"#C30000", width:"110px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", color:"white"}}>
         <Text style={{color:"white", fontSize:18 }}>Pesquisar</Text>
       </TouchableOpacity>
     </View>
@@ -146,7 +146,7 @@ const DetalheRecuperado=({ visible, onClose })=>{
           <Text style={{color:"white", marginLeft:10, marginTop:7}}>Unidade de medida: Kilograma</Text>
           <Text style={{color:"white", marginLeft:10, marginTop:7}}>Descrição: Esse lote foi recebido corretamente pelo funcionário Tal às 7h35, entregue por Fulano utilizando o veículo XPTO de placa ABC-0123</Text>
         </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Doar')} style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical: 50,marginBottom:"5%", marginTop:170}}>
+          <TouchableOpacity onPress={() => {navigation.navigate('Doar'); onClose();}} style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical: 50,marginBottom:"5%", marginTop:170}}>
             <Text style={{color:"white", fontSize:18 }}>Cadastrar Doação</Text>
           </TouchableOpacity>
           <Text style={{color:"#3DA2FF",marginTop:"25px",fontWeight: 600}}>

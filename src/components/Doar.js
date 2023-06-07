@@ -1,5 +1,6 @@
 import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity, Picker} from 'react-native';
+import axios from 'axios'
 
   const estilos = {
     h1:{
@@ -48,7 +49,7 @@ const DoacaoForm = () =>{
   const cadastrarDoacao = async () => {
     try {
       // Fazer a chamada para a API
-      const response = await axios.post('https://donatedine.com/api/doacao', {
+      const response = await axios.post('http://localhost:8080/api/doacao', {
         estoque: estoqueSelecionado,
         cnpj: cnpj,
         descricao: descricao
@@ -83,9 +84,12 @@ const DoacaoForm = () =>{
         </View>
           <InputText titulo={"CNPJ"}/>
           <InputText titulo={"Descrição"}/>
-            <TouchableOpacity style={estilos.botaoCadastrar}>
-                <Text style={{color:"white", fontSize:18 }}>Cadastrar</Text>
-            </TouchableOpacity>
+          <TouchableOpacity onPress={cadastrarDoacao} style={estilos.botaoCadastrar}>
+            <Text style={{color:"white", fontSize:18 }}>Cadastrar</Text>
+          </TouchableOpacity>
+          <Text style={{color:"#3DA2FF",marginTop:"32px",fontWeight: 600}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Pesquisa')}>Voltar</TouchableOpacity>
+          </Text>
         </View>
       </View>
   )

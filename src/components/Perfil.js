@@ -1,6 +1,6 @@
 import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';;
-
+import axios from 'axios'
 
 const Perfil=()=>{
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const Perfil=()=>{
   const atualizarPerfil = async () => {
     try {
       // Fazer a chamada para a API
-      const response = await axios.put('https://donatedine.com/api/{id}', {
+      const response = await axios.put('http://localhost:8080/api/{id}', {
         email: email,
         novoEmail: novoEmail,
         confirmarNovoEmail: confirmarNovoEmail,

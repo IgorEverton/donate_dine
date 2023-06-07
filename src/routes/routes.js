@@ -17,6 +17,7 @@ export default props => (
         <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Cadastro" component={Cadastro}/>
         <Stack.Screen name="Pesquisa" component={RoutesBar}/>
+        <Stack.Screen name="Doar" component={Doar}/>
     </Stack.Navigator>
     )
 
@@ -28,6 +29,7 @@ export function PesquisaNavigation(){
             component={Pesquisa}
             options={{headerShown: false}}
             />
+
         </Stack.Navigator>
     )
 }
@@ -53,7 +55,7 @@ export function PerfilNaNavigation(){
         </Stack.Navigator>
     )
 }
-export function DoarNaNavigation(){
+export function DoarNavigation(){
     return(
         <Stack.Navigator>
             <Stack.Screen

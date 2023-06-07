@@ -15,7 +15,7 @@ const LoginForm = () =>{
   const handleLogin = async () => {
     try {
       // Fazer a chamada para a API
-      const response = await axios.post('https://donatedine.com/api/login', {
+      const response = await axios.post('http://localhost:8080/api/login', {
         email: email,
         senha: senha
       });
