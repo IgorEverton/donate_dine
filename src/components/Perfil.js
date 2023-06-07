@@ -3,31 +3,26 @@ import {Text, View, TextInput, TouchableOpacity} from 'react-native';;
 import axios from 'axios'
 
 const Perfil=()=>{
+  const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [novoEmail, setNovoEmail] = useState('');
-  const [confirmarNovoEmail, setConfirmarNovoEmail] = useState('');
-  const [novaSenha, setNovaSenha] = useState('');
-  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [senha, setSenha] = useState('');
+
 
   const atualizarPerfil = async () => {
     try {
       // Fazer a chamada para a API
-      const response = await axios.put('http://localhost:8080/api/{id}', {
-        email: email,
-        novoEmail: novoEmail,
-        confirmarNovoEmail: confirmarNovoEmail,
-        novaSenha: novaSenha,
-        confirmarSenha: confirmarSenha
+      const response = await axios.put('http://localhost:8080/api/usuario/{id}', {
+        nome: nome,  
+        mail: email,
+        senha: senha,
       });
 
       // Tratar a resposta da API conforme necessário
 
       // Limpar os campos após a atualização
+      setNome('');
       setEmail('');
-      setNovoEmail('');
-      setConfirmarNovoEmail('');
-      setNovaSenha('');
-      setConfirmarSenha('');
+      setSenha('');
     } catch (error) {
       console.log(error);
       // Tratar erros de atualização do perfil aqui

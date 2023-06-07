@@ -10,8 +10,6 @@ const LoginForm = () =>{
   const [senha, setSenha] = useState("");
   const navigation = useNavigation();
 
-
-
   const handleLogin = async () => {
     try {
       // Fazer a chamada para a API

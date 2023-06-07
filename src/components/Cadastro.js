@@ -32,7 +32,6 @@ import axios from 'axios';
       nome: nome,
       email: email,
       senha: senha,
-      confirmaSenha: confirmaSenha
     };
     // Fazer a chamada à API usando o Axios
     axios.post('http://localhost:8080/api/usuario/cadastrar', formData)
