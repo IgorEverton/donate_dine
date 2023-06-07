@@ -36,7 +36,7 @@ function InputText(props){
   )
 }
 
-const CadastroForm = () =>{
+const DoacaoForm = () =>{
   const [estoqueSelecionado, setEstoqueSelecionado] = useState(null);
   const [cnpj, setCnpj] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -96,7 +96,7 @@ const CadastroForm = () =>{
 export default ()=>{
   return(
       <View style={{flex:1, backgroundColor:"black"}}> 
-        <CadastroForm/>
+        <DoacaoForm/>
       </View>
   )
 }

@@ -12,7 +12,7 @@ const Perfil=()=>{
   const atualizarPerfil = async () => {
     try {
       // Fazer a chamada para a API
-      const response = await axios.put('https://donatedine.com/api/perfil', {
+      const response = await axios.put('https://donatedine.com/api/{id}', {
         email: email,
         novoEmail: novoEmail,
         confirmarNovoEmail: confirmarNovoEmail,
@@ -62,7 +62,7 @@ const Perfil=()=>{
           </View>
 
           <TextInput style={{backgroundColor:"white", height:"30px", width:"250px",borderRadius:"5px",marginTop:"5px", marginBottom:"20px", fontSize:"14px", color:"#13293D"}}/>
-            <TouchableOpacity style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical:50,marginBottom:"5%"}}>
+            <TouchableOpacity onPress={atualizarPerfil} style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical:50,marginBottom:"5%"}}>
                 <Text style={{color:"white", fontSize:18 }}>Atualizar</Text>
             </TouchableOpacity> 
         </View>

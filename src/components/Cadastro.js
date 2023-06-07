@@ -35,7 +35,7 @@ import axios from 'axios';
       confirmaSenha: confirmaSenha
     };
     // Fazer a chamada à API usando o Axios
-    axios.post('URL_DA_API', formData)
+    axios.post('https://donatedine.com/api/usuario/cadastrar', formData)
       .then(response => {
         // Manipular a resposta da API, se necessário
         console.log(response.data);
