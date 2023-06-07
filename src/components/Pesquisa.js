@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import { Text, View, TextInput, TouchableOpacity, ScrollView, Modal} from 'react-native';
 import { RadioButton } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native';
+
+
 
 const Pesquisa=()=>{
   const [selectLote, setSelectLote] = useState();
@@ -9,6 +12,7 @@ const Pesquisa=()=>{
   const [selectedOption, setSelectedOption] = useState("lote");
   const [selectedValue, setSelectedValue] = useState("id");
   const [valueInput, setValueInput] = useState("");
+
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
@@ -130,6 +134,7 @@ const Pesquisa=()=>{
 )
 }
 const DetalheRecuperado=({ visible, onClose })=>{
+  const navigation = useNavigation();
     if (!visible) {
     return null;
   }
@@ -141,7 +146,7 @@ const DetalheRecuperado=({ visible, onClose })=>{
           <Text style={{color:"white", marginLeft:10, marginTop:7}}>Unidade de medida: Kilograma</Text>
           <Text style={{color:"white", marginLeft:10, marginTop:7}}>Descrição: Esse lote foi recebido corretamente pelo funcionário Tal às 7h35, entregue por Fulano utilizando o veículo XPTO de placa ABC-0123</Text>
         </View>
-          <TouchableOpacity style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical: 50,marginBottom:"5%", marginTop:170}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Doar')} style={{backgroundColor:"#0B8700", color:"white", width:"180px", height:"40px", borderRadius:"5px", justifyContent:"center", alignItems:"center", marginVertical: 50,marginBottom:"5%", marginTop:170}}>
             <Text style={{color:"white", fontSize:18 }}>Cadastrar Doação</Text>
           </TouchableOpacity>
           <Text style={{color:"#3DA2FF",marginTop:"25px",fontWeight: 600}}>
