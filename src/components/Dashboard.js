@@ -3,26 +3,34 @@ import { Text, View } from 'react-native';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import axios from 'axios'
 
-const fetchData = () => {
-  axios.get('http://localhost:8080/api/stats')
-  .then(response => {
-    // Manipule a resposta da API e atualize o estado com os dados recebidos
-    console.log(response.data);
-    setTotalLotesCadastrados(response.data.totalLotesCadastrados);
-    setTotalLotesDoados(response.data.totalLotesDoados);
-    setTotalAlimentoRecebido(response.data.totalAlimentoRecebido);
-    setTotalAlimentosDoados(response.data.totalAlimentoRecebido);
-    setMaiorFornecedor(response.data.maiorFornecedor);
-    setAlimentoDoados(response.data.alimentoDoados);
-  })
-  .catch(error => {
-    // Manipule os erros, se ocorrerem
-    console.error(error);
-  });
-}
 
-const RetornoDash=()=>{
-    useEffect(() => { fetchData(); }, []);
+const fetchData = (token) => {
+  axios
+    .get('http://localhost:8080/api/stats', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      // Manipule a resposta da API e atualize o estado com os dados recebidos
+      console.log(response.data);
+      setTotalLotesCadastrados(response.data.totalLotesCadastrados);
+      setTotalLotesDoados(response.data.totalLotesDoados);
+      setTotalAlimentoRecebido(response.data.totalAlimentoRecebido);
+      setTotalAlimentosDoados(response.data.totalAlimentoRecebido);
+      setMaiorFornecedor(response.data.maiorFornecedor);
+      setAlimentoDoados(response.data.alimentoDoados);
+    })
+    .catch((error) => {
+      // Manipule os erros, se ocorrerem
+      console.error(error);
+    });
+};
+
+const RetornoDash = ({ token }) => {
+  useEffect(() => {
+    fetchData(token);
+  }, [token]);
 
     const [totalLotesCadastrados, setTotalLotesCadastrados] = useState(0);
     const [totalLotesDoados, setTotalLotesDoados] = useState(0);
@@ -101,4 +109,3 @@ export default function App() {
       </View>
   );
 }
-

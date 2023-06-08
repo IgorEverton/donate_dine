@@ -37,7 +37,7 @@ function InputText(props){
   )
 }
 
-const DoacaoForm = () =>{
+const DoacaoForm = (token) =>{
   const [estoqueSelecionado, setEstoqueSelecionado] = useState(null);
   const [cnpj, setCnpj] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -53,7 +53,11 @@ const DoacaoForm = () =>{
         estoque: estoqueSelecionado,
         cnpj: cnpj,
         descricao: descricao
-      });
+      },{
+        headers:{
+          Authorization:`Bearer ${token},` 
+        }});
+        
 
       // Tratar a resposta da API conforme necessário
 

@@ -2,7 +2,7 @@ import React,  {useState} from 'react';
 import {Text, View, TextInput, TouchableOpacity} from 'react-native';;
 import axios from 'axios'
 
-const Perfil=()=>{
+const Perfil=({token})=>{
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -15,7 +15,10 @@ const Perfil=()=>{
         nome: nome,  
         mail: email,
         senha: senha,
-      });
+      },{
+      headers:{
+        Authorization:`Bearer ${token},` 
+      }});
 
       // Tratar a resposta da API conforme necessário
 
