@@ -1,8 +1,22 @@
 # Descrição
 
-Nossa solução utiliza inteligência artificial com reconhecimento de imagem  para automatizar o processo de separação de alimentos em ONGs. Através da análise de imagens, a IA identifica sinais de deterioração e qualidade dos alimentos, permitindo uma triagem mais rápida e precisa. Através da nossa solução, é possível monitorar a origem e histórico dos alimentos. A classificação automatizada e otimização da distribuição contribuem para reduzir desperdícios e garantir que os alimentos adequados sejam doados para pessoas em situação de vulnerabilidade. Essa solução oferece eficiência, agilidade e segurança na luta contra o desperdício de alimentos.
+## How to 
+### Ferramenta necessária: <br>
+NodeJS 18.16.0: https://nodejs.org/en/download
 
-# Arquitetura do projeto
+Após a instalação do NodeJS, clone esse projeto na sua máquina, copiando o link https://github.com/IgorEverton/donate_dine, após isso, crie uma pasta e abra o prompt de comando, navegando para dentro dessa pasta, e agora execute o código:
+```
+git clone https://github.com/IgorEverton/donate_dine
+```
+após isso, é necessário instalar as dependências, dentro da pasta clonada, para isso execute os códigos:
+
+```
+cd donate_dine
+```
+```
+npm install
+```
+após instalar as depêndencias, podemos iniciar a aplicação executando o comando ``` npm start ``` e logo após ele solicitará o modo que irá abrir, digite ```W``` para abrir no modo web.
 
 ---
 
@@ -19,8 +33,13 @@ Nossa solução utiliza inteligência artificial com reconhecimento de imagem  p
   - [Recuperar A Partir Da Data De Criação](#recuperar-lotes-a-partir-da-data-de-criação)
 - Estoque
   - [Recuperar](#recuperar-estoque)
+- Item
+  - [Criar Novo](#criar-itens)
+  - [Recuperar Todos do Estoque](#recuperar-todos-itens-do-estoque)
+  - [Recuperar Um Item do Estoque](#recuperar-um-item-do-estoque)
 -  Doação
     - [Criar Nova](#criar-uma-nova-doação)
+    - [Recuperar](#recuperar-uma-doação)
 - Status
     - [Estatísticas](#recuperar-estatísticas-do-sistema)
 ---
@@ -161,6 +180,62 @@ Nossa solução utiliza inteligência artificial com reconhecimento de imagem  p
 | 400 | Erro na requisição |
 | 401 | Falha na autenticação |
 
+---
+
+## Criar Lote
+`POST` /api/lote
+
+| Campo | Tipo | Obrigatório | Descrição |
+|:-------:|:------:|:-------------:|:-------------:|
+| quantidade | int | sim | a quantidade do lote |
+| unidade_medida | string | sim | a unidade de medida do lote |
+| descricao | string | sim | a descrição do lote |
+| fornecedor | string | sim | o fornecedor do lote |
+
+**Exemplo de corpo do request**
+```json
+{
+    "quantidade": 10,
+    "unidade_medida": "KILOGRAMA",
+    "descricao": "frutas diversas",
+    "fornecedor": "FIAP"
+}
+```
+
+**Exemplo de corpo de response**
+```json
+{
+    "id": "e1cbf04a-ef29-417e-8712-705ee18de95a",
+    "quantidade": 10,
+    "unidadeMedida": "KILOGRAMA",
+    "descricao": "frutas diversas",
+    "fornecedor": "FIAP",
+    "dataCriacao": "2023-06-04T19:01:42.9981971",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/lote/e1cbf04a-ef29-417e-8712-705ee18de95a"
+        },
+        "lotesPorQuantidade": {
+            "href": "http://localhost:8080/api/lote/quantidade/10"
+        },
+        "lotesPorUnidadeMedida": {
+            "href": "http://localhost:8080/api/lote/unidademedida/KILOGRAMA"
+        },
+        "lotesPorFornecedor": {
+            "href": "http://localhost:8080/api/lote/fornecedor/FIAP"
+        },
+        "lotesPorDataCriacao": {
+            "href": "http://localhost:8080/api/lote/datacriacao/2023-06-04T19%3A01%3A42.9981971"
+        }
+    }
+}
+```
+
+**Códigos de Resposta**
+| Código | Descrição
+|:-:|-
+| 200 | Usuário atualizado com sucesso |
+| 400 | Erro na requisição |
 
 ---
 
@@ -403,6 +478,33 @@ Nossa solução utiliza inteligência artificial com reconhecimento de imagem  p
 | 400 | Erro na requisição |
 | 404 | Lotes não encontrados |
 
+---
+
+## Criar Novo Estoque
+`POST` /api/estoque
+
+**Exemplo de corpo do request**
+```json
+{
+  "id_lote": "8bf2e0e1-e536-4208-8dd2-1601d3a67e6f"
+}
+```
+
+**Exemplo de corpo de response**
+```json
+{
+    "id": "7a2e4a10-dac3-4314-87a1-806015e364f2",
+    "loteId": "8bf2e0e1-e536-4208-8dd2-1601d3a67e6f",
+    "doacaoId": null,
+    "dataCriacao": "2023-06-04T21:11:42.3809821"
+}
+```
+
+**Códigos de Resposta**
+| Código | Descrição |
+|:-------:|:-----------:|
+| 201 | Estoque criado com sucesso |
+| 400 | Erro na requisição |
 
 ---
 
@@ -426,7 +528,26 @@ Nossa solução utiliza inteligência artificial com reconhecimento de imagem  p
 | 400 | Erro na requisição |
 | 404 | Estoque não encontrado |
 
+---
 
+## Criar Itens
+`POST` /api/itens
+
+**Exemplo de corpo do request**
+```json
+[
+    {
+        "nome": "banana",
+        "path_imagem": "C:\\Users\\thdev\\Documentos\\Fiap\\GLOBAL SOLUTION 1\\AI\\Classificacao\\Img1.png",
+        "classificacao": "Boa"
+    },
+    {
+        "nome": "banana",
+        "path_imagem": "C:\\Users\\thdev\\Documentos\\Fiap\\GLOBAL SOLUTION 1\\AI\\Classificacao\\Img2.png",
+        "classificacao": "Ruim"
+    }
+]
+```
 
 **Exemplo de corpo de response**
 ```json
@@ -454,8 +575,86 @@ Nossa solução utiliza inteligência artificial com reconhecimento de imagem  p
 }
 ```
 
+**Códigos de Resposta**
+| Código | Descrição |
+|:-------:|:-----------:|
+| 201 | Itens criados com sucesso |
+| 400 | Erro na requisição |
+
 ---
 
+## Recuperar Todos Itens do Estoque
+`GET` /api/estoque/{estoqueId}/itens
+
+**Exemplo de corpo de response**
+```json
+{
+    "content": [
+        {
+            "id": "3339dbc8-48f1-4d5e-8a25-7f01bfc8fe30",
+            "estoqueId": "7a2e4a10-dac3-4314-87a1-806015e364f2",
+            "classificacaoId": "a02e7dd6-f45b-4cc7-9caa-dc51751a5d23",
+            "nome": "banana",
+			"classificacao": "Ruim",
+            "imagemPath": "C:\\Users\\thdev\\Documentos\\Fiap\\GLOBAL SOLUTION 1\\AI\\Classificacao\\Img2.png"
+        },
+        {
+            "id": "42eb304b-6863-4029-9500-3b8703f81afb",
+            "estoqueId": "7a2e4a10-dac3-4314-87a1-806015e364f2",
+            "classificacaoId": "a300dd00-74d5-44a4-a9a5-773d5761f102",
+            "nome": "banana",
+			"classificacao": "Ruim",
+            "imagemPath": "C:\\Users\\thdev\\Documentos\\Fiap\\GLOBAL SOLUTION 1\\AI\\Classificacao\\Img1.png"
+        }
+    ],
+    "number": 0,
+    "totalElements": 2,
+    "totalPages": 1,
+    "first": true,
+    "last": true
+}
+```
+
+**Códigos de Resposta**
+| Código | Descrição |
+|:-------:|:-----------:|
+| 200 | Itens recuperados com sucesso |
+| 400 | Erro na requisição |
+| 404 | Itens não encontrados |
+
+---
+
+## Recuperar um Item do Estoque
+`GET` /api/estoque/{estoqueId}/item/{itemId}
+
+**Exemplo de corpo de response**
+```json
+{
+    "id": "82ca6e88-68a4-40ab-9d4f-660ca68d8729",
+    "estoqueId": "b7b701da-0ce6-488d-871f-25706c78d40a",
+    "classificacaoId": "63e0e61b-824a-4db0-be9c-dbf2b6b4818e",
+    "nome": "banana",
+    "classificacao": "Ruim",
+    "imagemPath": "C:\\Users\\thdev\\Documentos\\Fiap\\GLOBAL SOLUTION 1\\AI\\Classificacao\\Img2.png",
+    "_links": {
+        "self": {
+            "href": "http://localhost:8080/api/estoque/b7b701da-0ce6-488d-871f-25706c78d40a/item/82ca6e88-68a4-40ab-9d4f-660ca68d8729"
+        },
+        "Relacao": {
+            "href": "http://localhost:8080/api/estoque/b7b701da-0ce6-488d-871f-25706c78d40a/itens"
+        }
+    }
+}
+```
+
+**Códigos de Resposta**
+| Código | Descrição |
+|:-------:|:-----------:|
+| 200 | Item recuperado com sucesso |
+| 400 | Erro na requisição |
+| 404 | Item não encontrado |
+
+---
 
 ## Criar uma Nova Doação
 `POST` /api/doacao
@@ -489,6 +688,35 @@ Nossa solução utiliza inteligência artificial com reconhecimento de imagem  p
 |:-------:|:-----------:|
 | 201 | Doação criada com sucesso |
 | 400 | Erro na requisição |
+
+---
+
+## Recuperar uma Doação
+`GET` /api/doacao/{id}
+
+**Exemplo de corpo de response**
+```json
+response
+{
+    "id": "e7488153-7948-4679-ae73-9ac5e7beb345",
+    "estoqueId": "089ed730-e1fb-4407-8b01-ab0d6bf96845",
+    "descricao": "Doação feita para a igreja Tal localizada no endereco XPTO e recebido por Fulano de Tal",
+    "cnpjDestinatario": "11.111.111.0001/11",
+    "dataCriacao": "2023-06-05T08:43:03",
+    "_links": {
+        "estoque": {
+            "href": "http://localhost:8080/api/estoque/089ed730-e1fb-4407-8b01-ab0d6bf96845"
+        }
+    }
+}
+```
+
+**Códigos de Resposta**
+| Código | Descrição |
+|:-------:|:-----------:|
+| 200 | Doação recuperada com sucesso |
+| 400 | Erro na requisição |
+| 404 | Doação não encontrada |
 
 ---
 
